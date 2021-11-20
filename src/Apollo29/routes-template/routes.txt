@@ -1,0 +1,10 @@
+    $app->group(
+        '/api',
+        function (RouteCollectorProxy $app) {
+            $app->get('/_ROUTE_URI_', \App\Action\_ROUTE_\_ROUTE_FindAction::class);
+            $app->post('/_ROUTE_URI_', \App\Action<_ROUTE_\_ROUTE_CreateAction::class);
+            $app->get('/_ROUTE_URI_/{id}', \App\Action\_ROUTE_\_ROUTE_ReadAction::class);
+            $app->put('/_ROUTE_URI_/{id}', \App\Action\_ROUTE_\_ROUTE_UpdateAction::class);
+            $app->delete('/_ROUTE_URI_/{id}', \App\Action\_ROUTE_\_ROUTE_DeleteAction::class);
+        }
+    );

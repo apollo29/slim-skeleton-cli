@@ -1,0 +1,77 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3ee53eb2a68d798abffcfa6c0a4bef24",
+    "packages": [
+        {
+            "name": "simple-cli/simple-cli",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kylekatarnls/simple-cli.git",
+                "reference": "47055c9a172ab032e33a498001d2978c9800fd59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kylekatarnls/simple-cli/zipball/47055c9a172ab032e33a498001d2978c9800fd59",
+                "reference": "47055c9a172ab032e33a498001d2978c9800fd59",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15.0",
+                "phan/phan": "^2.3",
+                "phpmd/phpmd": "dev-master",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7",
+                "squizlabs/php_codesniffer": "^3.0",
+                "vimeo/psalm": "^3.6"
+            },
+            "bin": [
+                "bin/simple-cli"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleCli\\": "src/SimpleCli/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KyleK",
+                    "email": "kylekatarnls@gmail.com"
+                }
+            ],
+            "description": "A simple command line framework",
+            "support": {
+                "issues": "https://github.com/kylekatarnls/simple-cli/issues",
+                "source": "https://github.com/kylekatarnls/simple-cli/tree/1.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/simple-cli/simple-cli",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-11-18T22:40:00+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

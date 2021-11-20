@@ -1,0 +1,24 @@
+{
+    "name": "apollo29/slim-skeleton-cli",
+    "description": "command line interface for the slim skeleton",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas D'Ascoli",
+            "email": "thomas@dasco.li"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "simple-cli/simple-cli": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Apollo29\\": "src/Apollo29/"
+        }
+    },
+    "bin": [
+        "bin/slim-cli"
+    ]
+}
