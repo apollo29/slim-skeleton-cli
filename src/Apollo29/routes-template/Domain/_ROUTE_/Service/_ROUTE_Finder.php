@@ -25,7 +25,7 @@ final class _ROUTE_Finder
     /**
      * Find items.
      *
-     * @return _ROUTE_Data[] A list of users
+     * @return _ROUTE_Data[] A list of items
      */
     public function find(): array
     {

@@ -20,7 +20,7 @@ final class _ROUTE_UpdateAction
      * The constructor.
      *
      * @param Responder $responder The responder
-     * @param EventUpdater $eventUpdater The service
+     * @param _ROUTE_Updater $eventUpdater The service
      */
     public function __construct(Responder $responder, _ROUTE_Updater $updater)
     {

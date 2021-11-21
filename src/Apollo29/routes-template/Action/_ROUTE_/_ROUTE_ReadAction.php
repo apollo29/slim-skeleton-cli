@@ -64,15 +64,7 @@ final class _ROUTE_ReadAction
     private function transform(ResponseInterface $response, _ROUTE_Data $item): ResponseInterface
     {
         // Turn that object into a structured array
-        // todo
-        $data = [
-            'id' => $event->id,
-            'location' => $event->location,
-            'title' => $event->title,
-            'date' => $event->date,
-            'description' => $event->description,
-            'email' => $event->email,
-        ];
+        $data = (array) $item;
 
         // Turn all of that into a JSON string and put it into the response body
         return $this->responder->withJson($response, $data);

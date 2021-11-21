@@ -38,10 +38,10 @@ final class _ROUTE_FindAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        // Optional: Pass parameters from the request to the findUsers method
-        $users = $this->finder->find();
+        // Optional: Pass parameters from the request to the find method
+        $data = $this->finder->find();
 
-        return $this->transform($response, $users);
+        return $this->transform($response, $data);
     }
 
     /**
@@ -57,23 +57,14 @@ final class _ROUTE_FindAction
     {
         $list = [];
 
-        // todo
-        foreach ($date as $item) {
-            $list[] = [
-                'id' => $event->id,
-                'event' => $event->event,
-                'location' => $event->location,
-                'title' => $event->title,
-                'date' => $event->date,
-                'description' => $event->description,
-                'email' => $event->email,
-            ];
+        foreach ($data as $item) {
+            $list[] = (array) $item;
         }
 
         return $this->responder->withJson(
             $response,
             [
-                'data' => $list,
+                '_ROUTENAME_' => $list,
             ]
         );
     }

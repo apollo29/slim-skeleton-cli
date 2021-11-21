@@ -33,7 +33,7 @@ final class _ROUTE_Updater
         $this->repository = $repository;
         $this->validator = $validator;
         $this->logger = $loggerFactory
-            ->addFileHandler('item_updater.log')
+            ->addFileHandler('_ROUTENAME__updater.log')
             ->createLogger();
     }
 

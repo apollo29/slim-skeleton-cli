@@ -10,7 +10,6 @@ use Selective\Validation\Exception\ValidationException;
 /**
  * Service.
  */
-// todo
 final class _ROUTE_Validator
 {
     private _ROUTE_Repository $repository;
@@ -77,11 +76,8 @@ final class _ROUTE_Validator
     {
         $validator = $this->validationFactory->createValidator();
 
+        // todo implement your validator
         return $validator
-            ->notEmptyString('item', 'Input required')
-            ->notEmptyString('location', 'Input required')
-            ->notEmptyString('title', 'Input required')
-            ->notEmptyDate('date', 'Input required')
-            ->email('email', false, 'Input required');
+            ->notEmptyString('text', 'Input required');
     }
 }

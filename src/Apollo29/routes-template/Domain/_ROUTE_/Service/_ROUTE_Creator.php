@@ -53,7 +53,6 @@ final class _ROUTE_Creator
 
         // Map form data to user DTO (model)
         $item = new _ROUTE_Data($data);
-        $item->generate();
 
         // Insert user and get new item ID
         $itemId = $this->repository->insert($item);

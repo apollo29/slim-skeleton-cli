@@ -48,17 +48,12 @@ final class _ROUTE_Repository
      */
     public function getById(int $id): _ROUTE_Data
     {
-        // todo
-        $query = $this->queryFactory->newSelect('events');
+        // todo implement your data model
+        $query = $this->queryFactory->newSelect('_ROUTENAME_');
         $query->select(
             [
                 'id',
-                'event',
-                'location',
-                'title',
-                'date',
-                'description',
-                'email',
+                'text',
             ]
         );
 
@@ -67,7 +62,7 @@ final class _ROUTE_Repository
         $row = $query->execute()->fetch('assoc');
 
         if (!$row) {
-            throw new DomainException(sprintf('Event not found: %s', $id));
+            throw new DomainException(sprintf('_ROUTE_ not found: %s', $id));
         }
 
         return new _ROUTE_Data($row);
@@ -84,8 +79,7 @@ final class _ROUTE_Repository
     {
         $row = $this->toRow($item);
 
-        // todo
-        $this->queryFactory->newUpdate('events', $row)
+        $this->queryFactory->newUpdate('_ROUTENAME_', $row)
             ->andWhere(['id' => $item->id])
             ->execute();
     }
@@ -99,8 +93,7 @@ final class _ROUTE_Repository
      */
     public function existsId(int $id): bool
     {
-        // todo
-        $query = $this->queryFactory->newSelect('events');
+        $query = $this->queryFactory->newSelect('_ROUTENAME_');
         $query->select('id')->andWhere(['id' => $id]);
 
         return (bool)$query->execute()->fetch('assoc');
@@ -115,8 +108,7 @@ final class _ROUTE_Repository
      */
     public function deleteById(int $id): void
     {
-        // todo
-        $this->queryFactory->newDelete('events')
+        $this->queryFactory->newDelete('_ROUTENAME_')
             ->andWhere(['id' => $id])
             ->execute();
     }

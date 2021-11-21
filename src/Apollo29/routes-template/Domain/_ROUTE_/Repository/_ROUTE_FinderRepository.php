@@ -34,18 +34,13 @@ final class _ROUTE_FinderRepository
      */
     public function find(): array
     {
-        // todo
-        $query = $this->queryFactory->newSelect('events');
+        $query = $this->queryFactory->newSelect('_ROUTENAME_');
 
+        // todo implement your data model
         $query->select(
             [
                 'id',
-                'event',
-                'location',
-                'title',
-                'date',
-                'description',
-                'email',
+                'text',
             ]
         );
 
