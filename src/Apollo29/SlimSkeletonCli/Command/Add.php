@@ -17,7 +17,7 @@ class Add implements Command
 
     private static string $ROUTE = "_ROUTE_";
     private static string $ROUTE_NAME = "_ROUTENAME_";
-    private static string $SLIM_APP_PATH = "test"; //todo "src/App";
+    private static string $SLIM_APP_PATH = "src/App";
 
     /**
      * @argument
