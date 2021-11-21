@@ -33,7 +33,7 @@ final class _ROUTE_Creator
         $this->repository = $repository;
         $this->validator = $validator;
         $this->logger = $loggerFactory
-            ->addFileHandler('item_creator.log')
+            ->addFileHandler('_ROUTENAME__creator.log')
             ->createLogger();
     }
 
