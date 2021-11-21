@@ -37,7 +37,7 @@ class Add implements Command
     public string $routeName;
 
     /**
-     * @argument
+     * @option
      *
      * Optional: The destination path, default = src
      */
