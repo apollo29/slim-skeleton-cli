@@ -82,7 +82,7 @@ class Add implements Command
         foreach (scandir($routesTemplate) ?: [] as $file) {
             if (substr($file, 0, 1) !== '.') {
                 $originPath = $routesTemplate . '/' . $file;
-                $targetPath = __DIR__ .'/../../../../'. $this->slimPath. '/'. $file;
+                $targetPath = $this->slimPath. '/'. $file;
                 $this->copyAndRename($cli, $originPath, $targetPath);
             }
         }
