@@ -17,7 +17,6 @@ class Add implements Command
 
     private static string $ROUTE = "_ROUTE_";
     private static string $ROUTE_NAME = "_ROUTENAME_";
-    private static string $SLIM_APP_PATH = "src/App";
 
     /**
      * @argument
@@ -38,11 +37,11 @@ class Add implements Command
     public string $routeName;
 
     /**
-     * @option
+     * @argument
      *
-     * Something the command can use.
+     * Optional: The destination path, default = src
      */
-    public $foo;
+    public string $slimPath = "src";
 
     public function run(SimpleCli $cli): bool
     {
@@ -57,7 +56,7 @@ class Add implements Command
         }
 
         if (!$this->ensureSlimAppDirectoryExists()) {
-            $path = $this::$SLIM_APP_PATH;
+            $path = $this->slimPath;
             return $this->error($cli, "Unable to find the Slim/App directory (${path})");
         }
 
@@ -83,7 +82,7 @@ class Add implements Command
         foreach (scandir($routesTemplate) ?: [] as $file) {
             if (substr($file, 0, 1) !== '.') {
                 $originPath = $routesTemplate . '/' . $file;
-                $targetPath = __DIR__ .'/../../../../'. $this::$SLIM_APP_PATH. '/'. $file;
+                $targetPath = __DIR__ .'/../../../../'. $this->slimPath. '/'. $file;
                 $this->copyAndRename($cli, $originPath, $targetPath);
             }
         }
@@ -131,7 +130,7 @@ class Add implements Command
      */
     protected function ensureSlimAppDirectoryExists(): bool
     {
-        return is_dir($this::$SLIM_APP_PATH);
+        return is_dir($this->$this->slimPath);
     }
 
 
