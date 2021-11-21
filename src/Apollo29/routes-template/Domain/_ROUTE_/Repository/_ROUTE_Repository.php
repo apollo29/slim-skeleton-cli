@@ -32,7 +32,7 @@ final class _ROUTE_Repository
      */
     public function insert(_ROUTE_Data $item): int
     {
-        return (int)$this->queryFactory->newInsert('events', $this->toRow($item))
+        return (int)$this->queryFactory->newInsert('_ROUTENAME_', $this->toRow($item))
             ->execute()
             ->lastInsertId();
     }
