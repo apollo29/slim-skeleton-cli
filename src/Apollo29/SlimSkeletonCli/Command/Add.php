@@ -130,7 +130,7 @@ class Add implements Command
      */
     protected function ensureSlimAppDirectoryExists(): bool
     {
-        return is_dir($this->$this->slimPath);
+        return is_dir($this->slimPath);
     }
 
 
