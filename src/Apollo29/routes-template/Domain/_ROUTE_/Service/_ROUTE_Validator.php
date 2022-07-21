@@ -71,7 +71,7 @@ final class _ROUTE_Validator
      */
     private function createValidator(): Validator
     {
-        $validator = $this->validationFactory->createValidator();
+        $validator = $this->validation->createValidator();
 
         // todo implement your validator
         return $validator
