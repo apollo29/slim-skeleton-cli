@@ -25,7 +25,7 @@ final class _ROUTE_CreateAction
      */
     public function __construct(JsonRenderer $renderer, _ROUTE_Creator $creator)
     {
-        $this->jsonRenderer = $renderer;
+        $this->renderer = $renderer;
         $this->creator = $creator;
     }
 
@@ -46,8 +46,8 @@ final class _ROUTE_CreateAction
         $id = $this->creator->create($data);
 
         // Build the HTTP response
-        return $this->jsonRenderer
-            ->withJson($response, ['id' => $id])
+        return $this->renderer
+            ->json($response, ['id' => $id])
             ->withStatus(StatusCodeInterface::STATUS_CREATED);
     }
 }
