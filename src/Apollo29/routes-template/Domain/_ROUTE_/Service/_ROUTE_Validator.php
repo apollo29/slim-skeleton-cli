@@ -3,7 +3,7 @@
 namespace App\Domain\_ROUTE_\Service;
 
 use App\Domain\_ROUTE_\Repository\_ROUTE_Repository;
-use App\Factory\ValidationFactory;
+use App\Support\Validation;
 use Cake\Validation\Validator;
 use Selective\Validation\Exception\ValidationException;
 
@@ -14,18 +14,18 @@ final class _ROUTE_Validator
 {
     private _ROUTE_Repository $repository;
 
-    private ValidationFactory $validationFactory;
+    private Validation $validation;
 
     /**
      * The constructor.
      *
      * @param _ROUTE_Repository $repository The repository
-     * @param ValidationFactory $validationFactory The validation
+     * @param Validation $validation The validation
      */
-    public function __construct(_ROUTE_Repository $repository, ValidationFactory $validationFactory)
+    public function __construct(_ROUTE_Repository $repository, Validation $validation)
     {
         $this->repository = $repository;
-        $this->validationFactory = $validationFactory;
+        $this->validation = $validation;
     }
 
     /**
@@ -50,17 +50,14 @@ final class _ROUTE_Validator
      *
      * @param array $data The data
      *
+     * @return void
      * @throws ValidationException
      *
-     * @return void
      */
     public function validate(array $data): void
     {
         $validator = $this->createValidator();
-
-        $validationResult = $this->validationFactory->createValidationResult(
-            $validator->validate($data)
-        );
+        $validationResult = $this->validation->validate($validator, $data);
 
         if ($validationResult->fails()) {
             throw new ValidationException('Please check your input', $validationResult);
