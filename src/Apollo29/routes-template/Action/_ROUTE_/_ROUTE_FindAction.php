@@ -3,7 +3,7 @@
 namespace App\Action\_ROUTE_;
 
 use App\Domain\_ROUTE_\Service\_ROUTE_Finder;
-use App\Responder\Responder;
+use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -14,18 +14,18 @@ final class _ROUTE_FindAction
 {
     private _ROUTE_Finder $finder;
 
-    private Responder $responder;
+    private JsonRenderer $renderer;
 
     /**
      * The constructor.
      *
      * @param _ROUTE_Finder $finder The event index list viewer
-     * @param Responder $responder The responder
+     * @param JsonRenderer $renderer The responder
      */
-    public function __construct(_ROUTE_Finder $finder, Responder $responder)
+    public function __construct(_ROUTE_Finder $finder, JsonRenderer $renderer)
     {
         $this->finder = $finder;
-        $this->responder = $responder;
+        $this->renderer = $renderer;
     }
 
     /**
@@ -61,7 +61,7 @@ final class _ROUTE_FindAction
             $list[] = (array) $item;
         }
 
-        return $this->responder->withJson(
+        return $this->renderer->json(
             $response,
             [
                 '_ROUTENAME_' => $list,

@@ -3,7 +3,7 @@
 namespace App\Action\_ROUTE_;
 
 use App\Domain\_ROUTE_\Service\_ROUTE_Creator;
-use App\Responder\Responder;
+use App\Renderer\JsonRenderer;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,19 +13,19 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 final class _ROUTE_CreateAction
 {
-    private Responder $responder;
+    private JsonRenderer $renderer;
 
     private _ROUTE_Creator $creator;
 
     /**
      * The constructor.
      *
-     * @param Responder $responder The responder
+     * @param JsonRenderer $renderer The responder
      * @param _ROUTE_Creator $creator The service
      */
-    public function __construct(Responder $responder, _ROUTE_Creator $creator)
+    public function __construct(JsonRenderer $renderer, _ROUTE_Creator $creator)
     {
-        $this->responder = $responder;
+        $this->jsonRenderer = $renderer;
         $this->creator = $creator;
     }
 
@@ -46,7 +46,7 @@ final class _ROUTE_CreateAction
         $id = $this->creator->create($data);
 
         // Build the HTTP response
-        return $this->responder
+        return $this->jsonRenderer
             ->withJson($response, ['id' => $id])
             ->withStatus(StatusCodeInterface::STATUS_CREATED);
     }

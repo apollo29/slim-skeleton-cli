@@ -3,7 +3,7 @@
 namespace App\Action\_ROUTE_;
 
 use App\Domain\_ROUTE_\Service\_ROUTE_Deleter;
-use App\Responder\Responder;
+use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -14,18 +14,18 @@ final class _ROUTE_DeleteAction
 {
     private _ROUTE_Deleter $deleter;
 
-    private Responder $responder;
+    private JsonRenderer $renderer;
 
     /**
      * The constructor.
      *
      * @param _ROUTE_Deleter $deleter The service
-     * @param Responder $responder The responder
+     * @param JsonRenderer $renderer The responder
      */
-    public function __construct(_ROUTE_Deleter $deleter, Responder $responder)
+    public function __construct(_ROUTE_Deleter $deleter, JsonRenderer $renderer)
     {
         $this->deleter = $deleter;
-        $this->responder = $responder;
+        $this->renderer = $renderer;
     }
 
     /**
@@ -49,6 +49,6 @@ final class _ROUTE_DeleteAction
         $this->deleter->delete($id);
 
         // Render the json response
-        return $this->responder->withJson($response);
+        return $this->renderer->json($response);
     }
 }

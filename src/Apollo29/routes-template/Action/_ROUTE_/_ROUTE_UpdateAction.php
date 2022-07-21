@@ -3,7 +3,7 @@
 namespace App\Action\_ROUTE_;
 
 use App\Domain\_ROUTE_\Service\_ROUTE_Updater;
-use App\Responder\Responder;
+use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -12,19 +12,19 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 final class _ROUTE_UpdateAction
 {
-    private Responder $responder;
+    private JsonRenderer $renderer;
 
     private _ROUTE_Updater $updater;
 
     /**
      * The constructor.
      *
-     * @param Responder $responder The responder
+     * @param JsonRenderer $renderer The responder
      * @param _ROUTE_Updater $eventUpdater The service
      */
-    public function __construct(Responder $responder, _ROUTE_Updater $updater)
+    public function __construct(JsonRenderer $renderer, _ROUTE_Updater $updater)
     {
-        $this->responder = $responder;
+        $this->renderer = $renderer;
         $this->updater = $updater;
     }
 
@@ -50,6 +50,6 @@ final class _ROUTE_UpdateAction
         $this->updater->update($id, $data);
 
         // Build the HTTP response
-        return $this->responder->withJson($response);
+        return $this->renderer->json($response);
     }
 }

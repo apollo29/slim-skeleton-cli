@@ -4,7 +4,7 @@ namespace App\Action\_ROUTE_;
 
 use App\Domain\_ROUTE_\Data\_ROUTE_Data;
 use App\Domain\_ROUTE_\Service\_ROUTE_Reader;
-use App\Responder\Responder;
+use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -15,18 +15,18 @@ final class _ROUTE_ReadAction
 {
     private _ROUTE_Reader $reader;
 
-    private Responder $responder;
+    private JsonRenderer $renderer;
 
     /**
      * The constructor.
      *
      * @param _ROUTE_Reader $viewer The service
-     * @param Responder $responder The responder
+     * @param JsonRenderer $renderer The responder
      */
-    public function __construct(_ROUTE_Reader $ciewer, Responder $responder)
+    public function __construct(_ROUTE_Reader $ciewer, JsonRenderer $renderer)
     {
         $this->reader = $ciewer;
-        $this->responder = $responder;
+        $this->renderer = $renderer;
     }
 
     /**
@@ -67,6 +67,6 @@ final class _ROUTE_ReadAction
         $data = (array) $item;
 
         // Turn all of that into a JSON string and put it into the response body
-        return $this->responder->withJson($response, $data);
+        return $this->renderer->json($response, $data);
     }
 }
