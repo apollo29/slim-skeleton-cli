@@ -23,9 +23,9 @@ final class _ROUTE_ReadAction
      * @param _ROUTE_Reader $viewer The service
      * @param JsonRenderer $renderer The responder
      */
-    public function __construct(_ROUTE_Reader $ciewer, JsonRenderer $renderer)
+    public function __construct(_ROUTE_Reader $viewer, JsonRenderer $renderer)
     {
-        $this->reader = $ciewer;
+        $this->reader = $viewer;
         $this->renderer = $renderer;
     }
 
