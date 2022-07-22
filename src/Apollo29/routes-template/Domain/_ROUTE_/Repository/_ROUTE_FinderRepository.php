@@ -15,8 +15,6 @@ final class _ROUTE_FinderRepository
 
     private Hydrator $hydrator;
 
-    private static string $TABLENAME = "_TABLENAME_";
-
     /**
      * The constructor.
      *
@@ -36,15 +34,9 @@ final class _ROUTE_FinderRepository
      */
     public function find(): array
     {
-        $query = $this->queryFactory->newSelect($this::$TABLENAME);
+        $query = $this->queryFactory->newSelect(_ROUTE_Repository::$TABLE_NAME);
 
-        // todo implement your data model
-        $query->select(
-            [
-                'id',
-                'text',
-            ]
-        );
+        $query->select(_ROUTE_Repository::$MODEL);
 
         // Add more "use case specific" conditions to the query
         // ...

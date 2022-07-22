@@ -13,7 +13,12 @@ final class _ROUTE_Repository
 {
     private QueryFactory $queryFactory;
 
-    private static string $TABLENAME = "_TABLENAME_";
+    public static string $TABLE_NAME = "_TABLENAME_";
+    // todo implement your data model
+    public static array $MODEL = [
+        'id',
+        'text',
+    ];
 
     /**
      * The constructor.
@@ -34,7 +39,7 @@ final class _ROUTE_Repository
      */
     public function insert(_ROUTE_Data $item): int
     {
-        return (int)$this->queryFactory->newInsert($this::$TABLENAME, $this->toRow($item))
+        return (int)$this->queryFactory->newInsert($this::$TABLE_NAME, $this->toRow($item))
             ->execute()
             ->lastInsertId();
     }
@@ -44,20 +49,14 @@ final class _ROUTE_Repository
      *
      * @param int $id The item id
      *
+     * @return _ROUTE_Data The item
      * @throws DomainException
      *
-     * @return _ROUTE_Data The item
      */
     public function getById(int $id): _ROUTE_Data
     {
-        // todo implement your data model
-        $query = $this->queryFactory->newSelect($this::$TABLENAME);
-        $query->select(
-            [
-                'id',
-                'text',
-            ]
-        );
+        $query = $this->queryFactory->newSelect($this::$TABLE_NAME);
+        $query->select($this::$MODEL);
 
         $query->andWhere(['id' => $id]);
 
@@ -81,7 +80,7 @@ final class _ROUTE_Repository
     {
         $row = $this->toRow($item);
 
-        $this->queryFactory->newUpdate($this::$TABLENAME, $row)
+        $this->queryFactory->newUpdate($this::$TABLE_NAME, $row)
             ->andWhere(['id' => $item->id])
             ->execute();
     }
@@ -95,7 +94,7 @@ final class _ROUTE_Repository
      */
     public function existsId(int $id): bool
     {
-        $query = $this->queryFactory->newSelect($this::$TABLENAME);
+        $query = $this->queryFactory->newSelect($this::$TABLE_NAME);
         $query->select('id')->andWhere(['id' => $id]);
 
         return (bool)$query->execute()->fetch('assoc');
@@ -110,7 +109,7 @@ final class _ROUTE_Repository
      */
     public function deleteById(int $id): void
     {
-        $this->queryFactory->newDelete($this::$TABLENAME)
+        $this->queryFactory->newDelete($this::$TABLE_NAME)
             ->andWhere(['id' => $id])
             ->execute();
     }
@@ -124,6 +123,6 @@ final class _ROUTE_Repository
      */
     private function toRow(_ROUTE_Data $item): array
     {
-        return (array) $item;
+        return (array)$item;
     }
 }
