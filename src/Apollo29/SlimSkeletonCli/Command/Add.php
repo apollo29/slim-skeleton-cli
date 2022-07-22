@@ -1,4 +1,5 @@
 <?php
+
 namespace Apollo29\SlimSkeletonCli\Command;
 
 
@@ -17,6 +18,7 @@ class Add implements Command
 
     private static string $ROUTE = "_ROUTE_";
     private static string $ROUTE_NAME = "_ROUTENAME_";
+    private static string $TABLE_NAME = "_TABLENAME_";
 
     /**
      * @argument
@@ -39,6 +41,13 @@ class Add implements Command
     /**
      * @option
      *
+     * Optional: The Module Name (snake case)
+     */
+    public string $tableName = "";
+
+    /**
+     * @option
+     *
      * Optional: The destination path, default = src
      */
     public string $slimPath = "src";
@@ -53,6 +62,10 @@ class Add implements Command
             $routeName = strtolower($this->routeObject);
             $this->routeName = $routeName;
             $this->info($cli, "Use lowercase Route Object Name: ${routeName}");
+        }
+
+        if (empty($this->tableName)) {
+            $this->tableName = $this->routeName;
         }
 
         if (!$this->ensureSlimAppDirectoryExists()) {
@@ -75,14 +88,14 @@ class Add implements Command
 
     protected function copyTemplate(SimpleCli $cli): void
     {
-        $routesTemplate = __DIR__.'/../../routes-template';
+        $routesTemplate = __DIR__ . '/../../routes-template';
 
         $this->info($cli, "Template: ${routesTemplate}");
 
         foreach (scandir($routesTemplate) ?: [] as $file) {
             if (substr($file, 0, 1) !== '.') {
                 $originPath = $routesTemplate . '/' . $file;
-                $targetPath = $this->slimPath. '/'. $file;
+                $targetPath = $this->slimPath . '/' . $file;
                 $this->copyAndRename($cli, $originPath, $targetPath);
             }
         }
@@ -91,25 +104,27 @@ class Add implements Command
     private function copyAndRename(SimpleCli $cli, string $originPath, string $targetPath): void
     {
         $path = strtr($targetPath, [
-                $this::$ROUTE => $this->routeObject,
-                $this::$ROUTE_NAME => $this->routeName]);
+            $this::$ROUTE => $this->routeObject,
+            $this::$ROUTE_NAME => $this->routeName,
+            $this::$TABLE_NAME => $this->tableName]);
 
         if ($this->verbose) {
             $cli->writeLine("Creating ${path}");
         }
 
-        if (is_dir($originPath)){
-            mkdir($targetPath);
+        if (is_dir($originPath)) {
+            if (is_dir($targetPath)) {
+                mkdir($targetPath);
+            }
             foreach (scandir($originPath) ?: [] as $file) {
-                if ($file != "." && $file != ".."){
-                    $this->copyAndRename($cli,"$originPath/$file", strtr("$targetPath/$file",[
+                if ($file != "." && $file != "..") {
+                    $this->copyAndRename($cli, "$originPath/$file", strtr("$targetPath/$file", [
                         $this::$ROUTE => $this->routeObject,
                         $this::$ROUTE_NAME => $this->routeName
                     ]));
                 }
             }
-        }
-        else if (is_file($originPath)) {
+        } else if (is_file($originPath)) {
             file_put_contents(
                 $path,
                 strtr(
