@@ -15,6 +15,6 @@ class SlimCli extends SimpleCli
 
     public function getVersion(): string
     {
-        return '1.1.6';
+        return '1.1.7';
     }
 }

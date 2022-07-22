@@ -113,14 +113,13 @@ class Add implements Command
         }
 
         if (is_dir($originPath)) {
-            if (is_dir($targetPath)) {
-                mkdir($targetPath);
-            }
+            @mkdir($targetPath);
             foreach (scandir($originPath) ?: [] as $file) {
                 if ($file != "." && $file != "..") {
                     $this->copyAndRename($cli, "$originPath/$file", strtr("$targetPath/$file", [
                         $this::$ROUTE => $this->routeObject,
-                        $this::$ROUTE_NAME => $this->routeName
+                        $this::$ROUTE_NAME => $this->routeName,
+                        $this::$TABLE_NAME => $this->tableName
                     ]));
                 }
             }
@@ -131,7 +130,8 @@ class Add implements Command
                     (string)file_get_contents("$originPath"),
                     [
                         $this::$ROUTE => $this->routeObject,
-                        $this::$ROUTE_NAME => $this->routeName
+                        $this::$ROUTE_NAME => $this->routeName,
+                        $this::$TABLE_NAME => $this->tableName
                     ]
                 )
             );
