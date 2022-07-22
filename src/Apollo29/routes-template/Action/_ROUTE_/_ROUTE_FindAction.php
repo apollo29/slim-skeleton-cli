@@ -64,7 +64,7 @@ final class _ROUTE_FindAction
         return $this->renderer->json(
             $response,
             [
-                '_ROUTENAME_' => $list,
+                'data' => $list,
             ]
         );
     }
